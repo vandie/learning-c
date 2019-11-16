@@ -16,6 +16,8 @@ int main()
         This shorthand is gross imho. At very least I'd want this on the previous line.
         It works because nc is defined in the scope of main() so the for loop just increments it
         This in theory could work in JS too but I can't imagine it passing code review
+
+        EDIT: Acording to the book. This syntax is called a null statment and is used frequently.
     */
     printf("%.0f\n", nc); //Acording to the book, %f supports both floats and doubles
 }
