@@ -6,10 +6,10 @@
 
 int main()
 {
-    int c, status, charCount, i, si, max, total;
+    int c, status, charCount, i, si, max;
     int wordLengths[10]; //anything bigger than 9 can be labled with 10+
 
-    max = total = charCount = 0; //Start at 0
+    max = charCount = 0; //Start at 0
     status = OFFWORD; //start as off words
     for(i = 0; i <= 9; ++i)
         wordLengths[i] = 0; //default all the count values to 0
