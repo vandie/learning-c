@@ -27,16 +27,19 @@ int main()
 /* getLine: read a line into s, return value */
 int getLine(char s[], int lim)
 {
-    int c, i;
+    int c, i; // c is the  latest character, i is an index
 
+    /* 
+        while i is less than the limit - 1 and we haven't hit the end of a line
+    */
     for (i=0; i<lim-1  && (c=getchar()) != EOF && c != '\n'; ++i)
-        s[i] = c;
-    if(c =='\n') {
-        s[i] = c;
-        ++i;
+        s[i] = c; // set the current index of the array to the inputted char
+    if(c =='\n') { //if the next char is a new line
+        s[i] = c; //add the new line to the array
+        ++i; //increase the index
     }
-    s[i] = '\0';
-    return i;
+    s[i] = '\0'; // add an escape char
+    return i; // return the current index as it is equal to the length of the line
 }
 
 /* copy: copy 'from' into 'to'; assume to is big enough */
