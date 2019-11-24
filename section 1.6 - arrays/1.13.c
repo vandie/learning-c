@@ -6,6 +6,7 @@
 
 int main()
 {
+    //known bugs: lines will be offset is a word occurs more than 9 times
     int c, status, charCount, i, si, max;
     int wordLengths[10]; //anything bigger than 9 can be labled with 10+
 
