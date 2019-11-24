@@ -1,0 +1,8 @@
+# Ignore all
+*
+# Unignore all with extensions
+!*.c
+!*.md
+# Unignore all dirs
+!*/
+!.gitignore
