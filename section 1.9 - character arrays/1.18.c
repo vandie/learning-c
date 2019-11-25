@@ -20,7 +20,7 @@ int getLine(char s[], int lim)
         s[i] = c;
     
     while(s[i-1] == ' ' || s[i-1] == '\t') {//while the last char is a tab or space
-        s[i--] == '\0';//replace it with empty
+        s[i-1] == '\0';//replace it with empty
         i--;//go back one more space
     }
         
