@@ -18,13 +18,11 @@ int getLine(char s[], int lim)
 
     for(i = 0; i < lim-1 && (c = getchar()) != EOF && c != '\n'; ++i)// get the line to the array
         s[i] = c;
-    
-    while(s[i-1] == ' ' || s[i-1] == '\t') {//while the last char is a tab or space
-        s[i-1] == '\0';//replace it with empty
-        i--;//go back one more space
-    }
-        
-    if(c == "\n")//if c is a new line
+
+    for(i = i;i > 0 && (s[i-1] == ' ' || s[i-1] == '\t'); --i) //while the last char is a tab or space, decrease i
+        ;
+
+    if(c == '\n')//if c is a new line
         s[i] = c;//set c to a new line
         i++;//increase i again
 
