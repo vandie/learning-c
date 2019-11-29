@@ -26,9 +26,8 @@ int main() {
 
     textLength = getInput();
     if(textLength > 0){
-        getInput();
         removeComments();
-        printf("\n\n%s", code);
+        printf("\n%s", code);
     }
     else
     {
@@ -41,7 +40,7 @@ int getInput() {
     int i;
     char c;
 
-    for (i = 0; i < MAXTEXT && (c = getchar()) != EOF; i++)
+    for (i = 0; i < MAXTEXT && (c = getchar()) != EOF; ++i)
         code[i] = c;
 
     code[i] = '\0';
@@ -58,34 +57,48 @@ void removeComments() {
     int i, oi;
     char tempCode[MAXTEXT];
 
-    oi = 0;
+    inComment = FALSE;
+    inString = FALSE;
+
+    oi = 1;
     
-    for (i = 0; code[i] != '\0'; i++)
+    for (i = 1; code[i] != '\0' && i < MAXTEXT-1 && oi < MAXTEXT-1; i++) //start at one because we only care about double characters
     {
-        if(inComment == FALSE)
-            if(inString == TRUE)
+        if(inComment == FALSE) {
+            if(inString == TRUE) {
                 if(code[i] == stringStarter && code[i-1] != '/')
                     inString = FALSE;
-            else if(inString == FALSE && (code[i] == '"' || code[i] == '\'')) {
+            } else if(inString == FALSE && (code[i] == '"' || code[i] == '\'')) {
                 inString = TRUE;
                 stringStarter = code[i];
-            } else if (inString == FALSE)
+            } else if (inString == FALSE) {
                 if(code[i] == '/' && code[i-1] == '/') {
                     commentStarter = '/';
                     inComment = TRUE;
+                    --oi;
                 } else if(code[i] == '*' && code[i-1] == '/') {
                     commentStarter = '*';
                     inComment = TRUE;
+                    --oi;
                 }
-        else if(code[i] == '/' && code[i-1] == commentStarter)
+            }
+        } else if(code[i] == '/' && code[i-1] == commentStarter) {
             inComment = FALSE;
-        
+        } else if(code[i] == '\n' && commentStarter == '/') {
+            inComment = FALSE;
+        }
+
         if(inComment == FALSE) {
+            if (i == 1){
+                tempCode[0] = code[0];
+            }
             tempCode[oi] = code[i];
             oi++;
         }
     }
-
-    for (i = 0; tempCode[i] != '\0'; i++)
-        code[i] = tempCode[i];
+    tempCode[oi] = '\0';
+    for (i = 0; i < MAXTEXT && (code[i] = tempCode[i]) != '\0'; i++)
+        ;
+        
+    code[oi] = '\0';
 }
