@@ -60,7 +60,7 @@ void removeComments() {
     inComment = FALSE;
     inString = FALSE;
 
-    oi = 1;
+    oi = 0;
     
     for (i = 1; code[i] != '\0' && i < MAXTEXT-1 && oi < MAXTEXT-1; i++) //start at one because we only care about double characters
     {
@@ -91,6 +91,7 @@ void removeComments() {
         if(inComment == FALSE) {
             if (i == 1){
                 tempCode[0] = code[0];
+                ++oi;
             }
             tempCode[oi] = code[i];
             oi++;
