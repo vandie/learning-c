@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-#define MAX 5
+#define MAX 500
 
 int hexValue(char x);
 
@@ -12,27 +12,30 @@ int main()
     char c;
     char string[MAX];
     unsigned int total = 0,
+    length = 0,
     temp = 0,
     multiplier = 0,
     i = 0;
-    printf("Please insert a 6 digit HEX value: ");
-    for(i = 0; i <= MAX && (c = getchar()) != EOF; ++i){
+    printf("Please insert a HEX value: ");
+    for(i = 0; i <= MAX && (c = getchar()) != EOF && c != '\n'; ++i)
         string[i] = c;
+
+    length = strlen(string);
+
+    for(i = 0; i < length ; ++i) {
+        c = string[i];
         if(isxdigit(c)) {
-            multiplier = pow(16,5-i);
-            temp = hexValue(tolower(c)) * multiplier;
-            printf("Character %c equals %d\n", c, temp/multiplier);
-            total += temp;
+            multiplier = pow(16,length-(i+1));
+            temp = hexValue(tolower(c));
+            printf("Character %c equals %d * %d\n", c, temp, multiplier);
+            total += temp * multiplier;
         } else {
             printf("\n\nError: %c is not a valid hexidecimal character\n", c);
             return 1;
         }
     }
-    if(strlen(string) == 6){
-        printf("Total Value: %d\n", total);
-    } else {
-        printf("\n\nError: Expected 6 chars, got %lu\n", strlen(string));
-    }
+
+    printf("Total Value: %d\n", total);
 }
 
 int hexValue(char x)
