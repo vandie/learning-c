@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-#define MAX 500
+#define MAX 6 //anything more than this and you may overflow the int...
 
 int hexValue(char x);
 
